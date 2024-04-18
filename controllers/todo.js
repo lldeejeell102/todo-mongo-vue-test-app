@@ -74,10 +74,10 @@ router.put("/:id", verifyJWT, async (req, res) => {
 // })
 
 // Show - Get
-router.get('/:id', verifyJWT, async (req, res) => {
+router.get('/', verifyJWT, async (req, res) => {
     try {
-        const id = req.params.id;
-        const todo = await Todo.findById(id);
+        const userId = req.user.id
+        const todo = await Todo.find({ userId });
 
         if (!todo) {
             return res.status(404).send('Todo not found');
