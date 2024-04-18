@@ -2,7 +2,7 @@
 // DEPENDENCIES
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 const express = require("express")
-const User = require("../models/user.js")
+const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 const { Cookie } = require("express-session")
 
