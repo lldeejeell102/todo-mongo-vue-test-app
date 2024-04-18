@@ -3,6 +3,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const userRouter = require('./controllers/user')
 const todoRouter = require('./controllers/todo')
+const cors = require('cors')
 
 
 const mongoose = require('./models/connection')
@@ -10,6 +11,7 @@ const mongoose = require('./models/connection')
 
 
 const app = express()
+app.use(cors)
 app.use('/user', userRouter)
 app.use('/todo', todoRouter)
 app.get('/', (req, res) => {
