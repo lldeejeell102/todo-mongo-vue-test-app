@@ -77,6 +77,7 @@ router.put("/:id", verifyJWT, async (req, res) => {
 router.get('/', verifyJWT, async (req, res) => {
     try {
         const email = req.params.email;
+        console.log(email)
         const todo = await Todo.find({email: email});
 
         if (!todo) {
