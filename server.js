@@ -11,7 +11,8 @@ const mongoose = require('./models/connection')
 
 
 const app = express()
-app.use(cors)
+app.use(cors())
+app.use(bodyParser.json())
 app.use('/user', userRouter)
 app.use('/todo', todoRouter)
 app.get('/', (req, res) => {
