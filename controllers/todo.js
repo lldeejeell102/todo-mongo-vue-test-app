@@ -10,33 +10,37 @@ const router = express.Router()
 router.use(verifyJWT)
 
 // ROUTES
-router.get('/', async (req, re) => {
-    try{
-        const userID = req.user
-        const todos = await Todo.find({ userID })
-    }catch(error){
-        console.log("---", error.message, "---")
-        res.status(400).send('error, read logs for details')
+router.get('/protected', verifyJWT, async (req, res, Todo) => {
+    try {
+        const userId = req.user.id;
+        const todos = await Todo.find({ userId });
+
+        res.json({ message: "Welcome, " + req.user.name, todos });
+    } catch (error) {
+        console.log("---", error.message, "----");
+        res.status(400).send('error, read logs for details');
     }
-})
+});
 
 // New - Get
-router.get("/new", (req, res) => {
-    res.send("here's the new todo")
-})
+// router.get("/new", (req, res) => {
+//     res.send("here's the new todo")
+// })
 
 // Create - Post
-router.post("/", async (req, res) => {
-    try{
-        const userID = req.user
-        req.body.userID = userID
-        await Todo.create(req.body)
-        res.send("created todo")
-    } catch(error) {
-        console.log("----", error.message, "----")
-        res.status(400).send("error, read logs for details")
+router.post('/', async (req, res) => {
+    try {
+        const userId = req.user.id;
+        req.body.userId = userId;
+
+        const createdTodo = await Todo.create(req.body);
+        res.json({ message: 'Todo created successfully', todo: createdTodo });
+    } catch (error) {
+        console.log("---", error.message, "----");
+        res.status(400).send('error, read logs for details');
     }
-})
+});
+
 
 // Edit - Get
 router.get("/:id/edit", async (req, res) => {
@@ -51,7 +55,7 @@ router.get("/:id/edit", async (req, res) => {
 })
 
 // Update - Put
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyJWT, async (req, res) => {
     try{
         const id = req.params.id
         await Todo.findByIdAndUpdate(id, req.body)
@@ -63,23 +67,28 @@ router.put("/:id", async (req, res) => {
 })
 
 // Delete - Delete
-router.delete("/:id", async (req, res) => {
-    const id = req.params.id
-    await Todo.findByIdAndDelete(id)
-    res.send("deleted")
-})
+// router.delete("/:id", async (req, res) => {
+//     const id = req.params.id
+//     await Todo.findByIdAndDelete(id)
+//     res.send("deleted")
+// })
 
 // Show - Get
-router.get("/:id", async (req, res) => {
-    try{
-        const id = req.params.id
-        const todo = await Todo.findById(id)
-        res.send("/:id route", {todo})
-    } catch(error){
-        console.log("----", error.message, "----")
-        res.status(400).send("error, read logs for details")
+router.get('/:id', verifyJWT, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const todo = await Todo.findById(id);
+
+        if (!todo) {
+            return res.status(404).send('Todo not found');
+        }
+
+        res.json({ todo });
+    } catch (error) {
+        console.log("---", error.message, "----");
+        res.status(400).send('error, read logs for details');
     }
-})
+});
 
 
 

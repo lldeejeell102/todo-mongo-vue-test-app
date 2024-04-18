@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const bodyParser = require('body-parser')
 const userRouter = require('./controllers/user')
+const Todo = require('./models/Todo')
 const todoRouter = require('./controllers/todo')
 const cors = require('cors')
 
