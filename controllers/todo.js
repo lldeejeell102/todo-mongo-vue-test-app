@@ -76,9 +76,9 @@ router.put("/:id", verifyJWT, async (req, res) => {
 // Show - Get
 router.get('/', verifyJWT, async (req, res) => {
     try {
-        const email = req.params.email;
+        const username = req.params.username;
         console.log(email)
-        const todo = await Todo.find({email: email});
+        const todo = await Todo.find({username: username});
 
         if (!todo) {
             return res.status(404).send('Todo not found');
