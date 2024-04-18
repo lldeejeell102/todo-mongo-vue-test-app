@@ -77,6 +77,7 @@ router.put("/:id", verifyJWT, async (req, res) => {
 router.get('/', verifyJWT, async (req, res) => {
     try {
         const username = req.query.username;
+        console.log(username)
         const todo = await Todo.find({username: username});
 
         if (!todo) {
