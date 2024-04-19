@@ -22,56 +22,85 @@ router.get('/protected', verifyJWT, async (req, res, Todo) => {
     }
 });
 
+////////////////////////////////////////////////////////////////////////
+// NOT NEEDED
+////////////////////////////////////////////////////////////////////////
 // New - Get
 // router.get("/new", (req, res) => {
 //     res.send("here's the new todo")
 // })
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
+
+////////////////////////////////////////////////////////////////////////
+// NOT NEEDED
+////////////////////////////////////////////////////////////////////////
 // Create - Post
-router.post('/', async (req, res) => {
-    try {
-        const userId = req.user.id;
-        req.body.userId = userId;
+// router.post('/', async (req, res) => {
+//     try {
+//         const userId = req.user.id;
+//         req.body.userId = userId;
 
-        const createdTodo = await Todo.create(req.body);
-        res.json({ message: 'Todo created successfully', todo: createdTodo });
-    } catch (error) {
-        console.log("---", error.message, "----");
-        res.status(400).send('error, read logs for details');
-    }
-});
+//         const createdTodo = await Todo.create(req.body);
+//         res.json({ message: 'Todo created successfully', todo: createdTodo });
+//     } catch (error) {
+//         console.log("---", error.message, "----");
+//         res.status(400).send('error, read logs for details');
+//     }
+// });
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////////////////////////////
+// NOT NEEDED
+////////////////////////////////////////////////////////////////////////
 // Edit - Get
-router.get("/:id/edit", async (req, res) => {
-    try{
-        const id = req.params.id
-        const todo = await Todo.findById(id)
-        res.render("edit page", {todo})
-    } catch(error) {
-        console.log("----", error.message, "----")
-        res.status(400).send("error, read logs for details")
-    }
-})
+// router.get("/:id/edit", async (req, res) => {
+//     try{
+//         const id = req.params.id
+//         const todo = await Todo.findById(id)
+//         res.render("edit page", {todo})
+//     } catch(error) {
+//         console.log("----", error.message, "----")
+//         res.status(400).send("error, read logs for details")
+//     }
+// })
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
+
+////////////////////////////////////////////////////////////////////////
+// NOT NEEDED
+////////////////////////////////////////////////////////////////////////
 // Update - Put
-router.put("/:id", verifyJWT, async (req, res) => {
-    try{
-        const id = req.params.id
-        await Todo.findByIdAndUpdate(id, req.body)
-        res.send('updated')
-    } catch(error) {
-        console.log("----", error.message, "----")
-        res.status(400).send("error, read logs for details")
-    }
-})
+// router.put("/:id", verifyJWT, async (req, res) => {
+//     try{
+//         const id = req.params.id
+//         await Todo.findByIdAndUpdate(id, req.body)
+//         res.send('updated')
+//     } catch(error) {
+//         console.log("----", error.message, "----")
+//         res.status(400).send("error, read logs for details")
+//     }
+// })
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
+
+////////////////////////////////////////////////////////////////////////
+// NOT NEEDED
+////////////////////////////////////////////////////////////////////////
 // Delete - Delete
 // router.delete("/:id", async (req, res) => {
 //     const id = req.params.id
 //     await Todo.findByIdAndDelete(id)
 //     res.send("deleted")
 // })
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
 
 // Show - Get
 router.get('/', verifyJWT, async (req, res) => {
